@@ -1,0 +1,28 @@
+form {
+    display: block;
+}
+
+form input {
+    border-radius: 5px;
+    border: 2px solid #FFF;
+}
+
+form textarea {
+    border-radius: 5px;
+    border: 2px solid #FFF;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 0 0;
+    color: #2a3166;
+    font-weight: bold;
+}
+
+form span.helptext {
+    font-size: small;
+}
+
+form input.btn {
+    margin-top:20px;
+}

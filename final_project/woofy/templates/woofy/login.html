@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <input type="submit" class="btn btn-light btn-sm" value="zaloguj"> <input type="button" class="btn btn-light btn-sm" value="powrót" onclick="history.back()">
+</form>
+
+{% endblock %}

@@ -1,0 +1,139 @@
+h1#logo {
+    font-family: 'Pacifico', cursive;
+    color: #ee7879;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 50px;
+    padding-bottom: 20px;
+}
+
+h3 {
+    text-align: center;
+    font-weight: bold;
+    color: #2a3166;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    width: 50%;
+    height: 100%;
+    position: center;
+    margin: 0 auto;
+    background-color: #d1eee6;
+}
+
+#top {
+    width: 100%;
+    font-size: 15px;
+    color: #ee7879;
+    text-align: right;
+    background-color: #2a3166;
+    margin: 0 10px 10px 10px;
+}
+
+li.menu {
+    list-style-type: none;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#header {
+    width: 95%;
+    text-align: left;
+    background-color: #d1eee6;
+    color: #2a3166;
+    padding: 10px;
+    margin: 10px;
+}
+
+#left {
+    float: left;
+    width: 58%;
+    text-align: left;
+    background-color: #f4abaa;
+    padding: 10px;
+    margin: 10px;
+}
+
+#right {
+    float: right;
+    width: 37%;
+    text-align: left;
+    background-color: #f4abaa;
+    padding: 10px 0 10px 10px;
+    margin: 10px 0 10px 10px;
+
+}
+
+#small {
+    font-size: small;
+}
+
+#footer {
+    clear: both;
+    width: 100%;
+    font-size: 15px;
+    color: #ee7879;
+    text-align: right;
+    background-color: #2a3166;
+    margin: 10px 10px 0 10px;
+    /*position: fixed;*/
+    bottom: 0;
+
+}
+
+
+a:link {
+    color: #FFF;
+}
+
+a:visited {
+    color: #FFF;
+}
+
+a:hover {
+    color: #FFF;
+    text-decoration: underline;
+    text-decoration-color: #ee7879;
+}
+
+a:active {
+    color: #ee7879;
+    text-decoration: underline;
+    text-decoration-color: #ee7879;
+}
+
+.city {
+    text-transform: uppercase;
+}
+
+.title {
+    font-weight: bold;
+    color: #2a3166;
+}
+
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #254646;
+}
+
+.svg-icon circle {
+    stroke: #254646;
+    stroke-width: 1;
+}

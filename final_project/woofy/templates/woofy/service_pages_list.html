@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+<!--blok lewy-->
+{% block content %}
+{% load get_item %}
+<h3>Usługi dla Twojego pieska</h3><br>
+
+{% if perms.woofy.add_servicepage %}
+<li class="menu">
+            <a href="{%url 'add-service-page' %}">dodaj stronę usługi</a>
+</li>
+{% endif %}
+
+<br><br>
+{% for page in service_pages %}
+<p>
+    {{ page.name }} ({{ categories|get_item:page.category }})
+    <br>
+    {{ page.address }} <span class="city">{{ page.city }}</span></p>
+<p>
+    <a href="{% url 'service-page-details' page.id %}">sprawdź szczegóły</a>
+    <br>
+    <span class="small">
+    {% if user == page.user %}
+        <a href="{% url 'page-delete' page.id %}">usuń</a>/edytuj
+    {% else %}
+
+    {% endif %}</span>
+</p>
+<hr>
+{% endfor %}
+
+{% endblock %}
