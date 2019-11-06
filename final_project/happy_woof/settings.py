@@ -125,7 +125,7 @@ LOGIN_URL = '/login/'
 
 try:
     from happy_woof.local_settings import DATABASES
-except ModuleNotFoundError:
+except ImportError:
     print("Brak konfiguracji bazy danych w pliku local_settings.py")
     print("Uzupełnij dane i spróbuj ponownie")
     exit(0)
