@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User, Group
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
@@ -14,9 +15,17 @@ from woofy.models import WoofyPost, ServicePage, CATEGORIES, Comment, Announceme
 
 class AllPostView(View):
     def get(self, request):
-        all_posts = WoofyPost.objects.all().order_by('-creation_date')[:5]
+        all_posts = WoofyPost.objects.all().order_by('-creation_date')
         all_comments = Comment.objects.all()
-        ctx = {'all_posts': all_posts,
+        page = request.GET.get('page', 1)
+        paginator = Paginator(all_posts, 5)
+        try:
+            posts = paginator.page(page)
+        except PageNotAnInteger:
+            posts = paginator.page(1)
+        except EmptyPage:
+            posts = paginator.page(paginator.num_pages)
+        ctx = {'posts': posts,
                'all_coments': all_comments}
         return render(request, 'woofy/all_posts.html', ctx)
 

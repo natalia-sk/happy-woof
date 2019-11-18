@@ -3,9 +3,13 @@
 <!--blok lewy-->
 {% block content %}
 
-<h3>Tablica</h3><br>
+<h3>Tablica</h3>
 
-{% for post in all_posts %}
+{% include 'base/posts_paginator.html' %}
+
+<br>
+
+{% for post in posts %}
 <p>
     <span>{{ post.content }}</span>
 </p>
@@ -26,5 +30,7 @@
 </p>
 <hr>
 {% endfor %}
+
+{% include 'base/posts_paginator.html' %}
 
 {% endblock %}

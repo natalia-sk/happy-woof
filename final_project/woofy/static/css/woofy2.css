@@ -137,3 +137,8 @@ SVG Icons - svgicons.sparkk.fr
     stroke: #254646;
     stroke-width: 1;
 }
+
+p.paginator {
+    text-align: center;
+    font-size: small;
+}
