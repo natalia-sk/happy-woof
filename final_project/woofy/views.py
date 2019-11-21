@@ -102,6 +102,11 @@ class CommentDeleteView(View):
         return redirect('/')
 
 
+class AllAnnouncementView(View):
+    def get(self, request):
+        return render(request, 'woofy/all_announcements.html')
+
+
 class AnnouncementDetailsView(View):
     def get(self, request, announcement_id):
         announcement = Announcement.objects.get(id=announcement_id)
@@ -137,7 +142,7 @@ class AddNewAnnouncementView(View):
             instance = form.save(commit=False)
             instance.user = request.user
             instance.save()
-            return redirect('index')
+            return redirect('announcements')
         return render(request, 'woofy/add_announcement.html', {'form': form})
 
 

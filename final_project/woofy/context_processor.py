@@ -6,5 +6,5 @@ def add_user_info(request):
 
 
 def announcements_list(request):
-    all_announcements = Announcement.objects.all().order_by('-creation_date')[:5]
+    all_announcements = Announcement.objects.all().order_by('-creation_date')
     return {'all_announcements': all_announcements}

@@ -4,11 +4,12 @@ from happy_woof import settings
 from woofy.views import AllPostView, LoginView, LogoutView, UserCreationView, AddNewPostView, AddNewAnnouncementView, \
     ServicePageListView, ServicePageDetailsView, AddServicePageView, PostDetailsView, UserDetailsView, \
     MessageDetailView, PostDeleteView, CommentDeleteView, AnnouncementDeleteView, AnnouncementDetailsView, \
-    ServicePageDeleteView, Error404View, EditUserDetailsView, ChangeUserPasswordView, NewMessageView
+    ServicePageDeleteView, Error404View, EditUserDetailsView, ChangeUserPasswordView, NewMessageView, AllAnnouncementView
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('', AllPostView.as_view(), name='index'),
+    path('all_announcements', AllAnnouncementView.as_view(), name='announcements'),
     path('service_pages/', ServicePageListView.as_view(), name='service-pages'),
 
     # details
