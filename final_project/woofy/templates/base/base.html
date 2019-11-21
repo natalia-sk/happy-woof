@@ -42,7 +42,7 @@
 
 <!--            LOGO-->
             <p></p>
-            <a href="{% url 'index' %}"><h1 id="logo">happy woof</h1></a>
+            <a id="logo-link" href="{% url 'index' %}"><h1 id="logo">happy woof</h1></a>
             <p></p>
         </div>
 
@@ -56,8 +56,8 @@
 <!--        PRAWA STRONA-->
         <div id="right">
             {% block right %}
-            <h3>Ogłoszenia</h3><br>
-            {% for announcement in all_announcements %}
+            <h3>Ostatnie ogłoszenia</h3><br>
+            {% for announcement in all_announcements|slice:":5" %}
             <p>
                 <span class="title">{{announcement.title}}</span><br>
             {{ announcement.content }}
@@ -78,7 +78,11 @@
             </p>
             <hr>
             {% endfor %}
+
+            <p class="small-center"><a href="{% url 'announcements' %}">Zobacz więcej</a></p>
+
             {% endblock %}
+
         </div>
 
 <!--        MENU DÓŁ-->
