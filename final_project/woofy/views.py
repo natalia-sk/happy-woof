@@ -14,6 +14,10 @@ from woofy.models import WoofyPost, ServicePage, CATEGORIES, Comment, Announceme
 
 
 class AllPostView(View):
+    """
+    Main page with the newest posts, announcements
+    """
+
     def get(self, request):
         all_posts = WoofyPost.objects.all().order_by('-creation_date')
         all_comments = Comment.objects.all()
@@ -31,6 +35,10 @@ class AllPostView(View):
 
 
 class PostDetailsView(View):
+    """
+    The view with all details of the post, logged in users can add comments
+    """
+
     def get(self, request, post_id):
         form = CommentForm()
         post = WoofyPost.objects.get(id=post_id)
@@ -58,7 +66,7 @@ class PostDetailsView(View):
 
 class AddNewPostView(View):
     """
-    Adding new post only for logged in users
+    Adding new post only for logged in users.
     """
 
     @method_decorator(login_required)
@@ -77,6 +85,10 @@ class AddNewPostView(View):
 
 
 class PostDeleteView(View):
+    """
+    Confirmation of deleting the post. Only post's author can do this.
+    """
+
     @method_decorator(login_required)
     def get(self, request, post_id):
         return render(request, 'woofy/woofypost_confirm_delete.html')
@@ -90,6 +102,10 @@ class PostDeleteView(View):
 
 
 class CommentDeleteView(View):
+    """
+    Confirmation of deleting the comment. Only comment's author can do this.
+    """
+
     @method_decorator(login_required)
     def get(self, request, comment_id):
         return render(request, 'woofy/comment_confirm_delete.html')
@@ -103,17 +119,29 @@ class CommentDeleteView(View):
 
 
 class AllAnnouncementView(View):
+    """
+    The view with all announcements (only with titles and short descriptions).
+    """
+
     def get(self, request):
         return render(request, 'woofy/all_announcements.html')
 
 
 class AnnouncementDetailsView(View):
+    """
+    The view with long description of the announcement.
+    """
+
     def get(self, request, announcement_id):
         announcement = Announcement.objects.get(id=announcement_id)
         return render(request, 'woofy/announcement_details.html', {'announcement': announcement})
 
 
 class AnnouncementDeleteView(View):
+    """
+    Confirmation of deleting the announcement. Only announcement's author can do this.
+    """
+
     @method_decorator(login_required)
     def get(self, request, announcement_id):
         return render(request, 'woofy/announcement_confirm_delete.html')
