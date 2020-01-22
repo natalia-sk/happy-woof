@@ -174,8 +174,11 @@ class AddNewAnnouncementView(View):
         return render(request, 'woofy/add_announcement.html', {'form': form})
 
 
-# widok wszystkich stron usługodawców
 class ServicePageListView(View):
+    """
+    The view with a list of all service provider's pages.
+    """
+
     def get(self, request):
         service_pages = ServicePage.objects.all().order_by('name')
         categories = dict(CATEGORIES)
@@ -184,8 +187,11 @@ class ServicePageListView(View):
         return render(request, 'woofy/service_pages_list.html', ctx)
 
 
-# szczegółowy widok strony usługodawcy
 class ServicePageDetailsView(View):
+    """
+    The view with all details about the service provider.
+    """
+
     def get(self, request, page_id):
         page = ServicePage.objects.get(id=page_id)
         categories = dict(CATEGORIES)
@@ -195,6 +201,10 @@ class ServicePageDetailsView(View):
 
 
 class AddServicePageView(View):
+    """
+    Adding new service page, only for logged in users with special permission.
+    """
+
     @method_decorator(permission_required('woofy.add_servicepage'))
     def get(self, request):
         form = AddServicePageForm()
@@ -211,6 +221,11 @@ class AddServicePageView(View):
 
 
 class ServicePageDeleteView(View):
+    """
+    Confirmation of deleting the service page.
+    Only service page's author can do this (special permission required).
+    """
+
     @method_decorator(permission_required('woofy.delete_servicepage'))
     def get(self, request, page_id):
         return render(request, 'woofy/servicepage_confirm_delete.html')
@@ -224,6 +239,10 @@ class ServicePageDeleteView(View):
 
 
 class UserDetailsView(View):
+    """
+    All user details and last activities.
+    """
+
     @method_decorator(login_required)
     def get(self, request, user_id):
         user = User.objects.get(id=user_id)
@@ -244,6 +263,10 @@ class UserDetailsView(View):
 
 
 class EditUserDetailsView(View):
+    """
+    User data editing view (user can't change password here).
+    """
+
     @method_decorator(login_required)
     def get(self, request, user_id):
         form = MyUserChangeForm(instance=request.user)
@@ -262,6 +285,10 @@ class EditUserDetailsView(View):
 
 
 class ChangeUserPasswordView(View):
+    """
+    Password change view, only for logged in users.
+    """
+
     @method_decorator(login_required)
     def get(self, request):
         form = PasswordChangeForm(request.user)
@@ -277,6 +304,11 @@ class ChangeUserPasswordView(View):
 
 
 class MessageDetailView(View):
+    """
+    Message details view, user can reply to the sender of message.
+    Only for logged in users.
+    """
+
     @method_decorator(login_required)
     def get(self, request, user_id, message_id):
         user = User.objects.get(id=user_id)
@@ -329,6 +361,10 @@ class MessageDetailView(View):
 
 
 class NewMessageView(View):
+    """
+    View of creating a new message.
+    """
+
     def get(self, request):
         form = NewMessageForm(instance=request.user)
         return render(request, 'woofy/msg_send.html', {'form': form})
@@ -346,6 +382,10 @@ class NewMessageView(View):
 
 
 class UserCreationView(View):
+    """
+    New user registration view.
+    """
+
     def get(self, request):
         form = MyUserForm()
         return render(request, 'woofy/add_user.html', {'form': form})
@@ -363,6 +403,10 @@ class UserCreationView(View):
 
 
 class LoginView(View):
+    """
+    Login view.
+    """
+
     def get(self, request):
         form = LoginForm()
         return render(request, 'woofy/login.html', {'form': form})
@@ -381,6 +425,10 @@ class LoginView(View):
 
 
 class LogoutView(View):
+    """
+    Logout view
+    """
+
     def get(self, request):
         logout(request)
         return HttpResponseRedirect('/')
