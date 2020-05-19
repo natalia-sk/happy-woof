@@ -1,5 +1,9 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+
+class MyUser(AbstractUser):
+    email = models.EmailField(unique=True)
 
 
 class WoofyPost(models.Model):
@@ -10,7 +14,7 @@ class WoofyPost(models.Model):
                             help_text='Podaj swoje miasto, ułatwi to życie innym',
                             default='Cała Polska')
     creation_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
 
 CATEGORIES = (
@@ -38,7 +42,7 @@ class ServicePage(models.Model):
     phone = models.CharField(max_length=16, verbose_name='Telefon', null=True)
     email = models.EmailField(verbose_name='e-mail', null=True)
     homepage = models.URLField(verbose_name='Twoja strona www', null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
 
 class Announcement(models.Model):
@@ -51,19 +55,19 @@ class Announcement(models.Model):
                             help_text='Podaj swoje miasto, ułatwi to życie innym',
                             default='Cała Polska')
     creation_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     content = models.CharField(max_length=140, verbose_name='Komentarz')
     creation_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     post = models.ForeignKey(WoofyPost, on_delete=models.CASCADE)
 
 
 class Message(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender', verbose_name='Nadawca')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='receiver', verbose_name='Odbiorca')
+    sender = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='sender', verbose_name='Nadawca')
+    receiver = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='receiver', verbose_name='Odbiorca')
     title = models.CharField(max_length=128, verbose_name='Temat')
     content = models.TextField(verbose_name='Wiadomość')
     creation_date = models.DateTimeField(auto_now_add=True)
