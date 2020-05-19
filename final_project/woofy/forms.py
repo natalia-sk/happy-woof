@@ -67,7 +67,7 @@ class MyUserForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'groups')
         field_classes = {'username': UsernameField}
-    #
+
     # def clean_email(self):
     #     cleaned_data = super().clean()
     #     email = cleaned_data.get('email')
