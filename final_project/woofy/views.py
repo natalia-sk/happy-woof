@@ -10,7 +10,7 @@ from django.views import View
 
 from woofy.forms import AddNewPostForm, LoginForm, MyUserForm, AddNewAnnouncementForm, AddServicePageForm, \
     CommentForm, MessageForm, MyUserChangeForm, NewMessageForm
-from woofy.models import WoofyPost, ServicePage, CATEGORIES, Comment, Announcement, Message
+from woofy.models import MyUser, WoofyPost, ServicePage, CATEGORIES, Comment, Announcement, Message
 
 
 class AllPostView(View):
@@ -245,7 +245,7 @@ class UserDetailsView(View):
 
     @method_decorator(login_required)
     def get(self, request, user_id):
-        user = User.objects.get(id=user_id)
+        user = MyUser.objects.get(id=user_id)
         posts = WoofyPost.objects.filter(user_id=user.id).order_by('-creation_date')
         pages = ServicePage.objects.filter(user_id=user.id).order_by('name')
         announcements = Announcement.objects.filter(user_id=user.id).order_by('-creation_date')
@@ -274,7 +274,7 @@ class EditUserDetailsView(View):
 
     def post(self, request, user_id):
         form = MyUserChangeForm(request.POST)
-        user = User.objects.get(id=user_id)
+        user = MyUser.objects.get(id=user_id)
         if form.is_valid():
             user.email = form.cleaned_data['email']
             user.first_name = form.cleaned_data['first_name']
@@ -311,10 +311,10 @@ class MessageDetailView(View):
 
     @method_decorator(login_required)
     def get(self, request, user_id, message_id):
-        user = User.objects.get(id=user_id)
+        user = MyUser.objects.get(id=user_id)
         msg = Message.objects.get(id=message_id)
-        sender = User.objects.get(id=msg.sender_id)
-        receiver = User.objects.get(id=msg.receiver_id)
+        sender = MyUser.objects.get(id=msg.sender_id)
+        receiver = MyUser.objects.get(id=msg.receiver_id)
         r_messages = Message.objects.filter(receiver_id=user.id).order_by('-creation_date')
         s_messages = Message.objects.filter(sender_id=user.id).order_by('-creation_date')
         form = MessageForm()
@@ -329,10 +329,10 @@ class MessageDetailView(View):
 
     def post(self, request, user_id, message_id):
         form = MessageForm(request.POST)
-        user = User.objects.get(id=user_id)
+        user = MyUser.objects.get(id=user_id)
         msg = Message.objects.get(id=message_id)
-        sender = User.objects.get(id=msg.sender_id)
-        receiver = User.objects.get(id=msg.receiver_id)
+        sender = MyUser.objects.get(id=msg.sender_id)
+        receiver = MyUser.objects.get(id=msg.receiver_id)
         r_messages = Message.objects.filter(receiver_id=user.id).order_by('-creation_date')
         s_messages = Message.objects.filter(sender_id=user.id).order_by('-creation_date')
         if form.is_valid():
@@ -395,7 +395,7 @@ class UserCreationView(View):
         if form.is_valid():
             u = form.save()
             login(request, u)
-            user = User.objects.get(username=form.cleaned_data['username'])
+            user = MyUser.objects.get(username=form.cleaned_data['username'])
             user_group = Group.objects.get(name=form.cleaned_data['groups'])
             user.groups.add(user_group)
             return redirect('index')

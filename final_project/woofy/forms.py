@@ -1,9 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField, UserChangeForm
 from django.contrib.auth.models import User, Group
-from prompt_toolkit.validation import ValidationError
 
-from woofy.models import WoofyPost, Announcement, ServicePage, Comment, Message
+
+from woofy.models import MyUser, WoofyPost, Announcement, ServicePage, Comment, Message
 
 
 # dodawanie nowego posta
@@ -64,22 +64,15 @@ class MyUserForm(UserCreationForm):
     groups = forms.ModelChoiceField(label='Rodzaj konta', queryset=Group.objects.all())
 
     class Meta:
-        model = User
+        model = MyUser
         fields = ('username', 'first_name', 'last_name', 'email', 'groups')
         field_classes = {'username': UsernameField}
-
-    # def clean_email(self):
-    #     cleaned_data = super().clean()
-    #     email = cleaned_data.get('email')
-    #     if User.objects.filter(email=email).exists():
-    #         raise ValidationError("E-mail już zarejestrowany.")
-    #     return email
 
 
 class MyUserChangeForm(UserChangeForm):
 
     class Meta:
-        model = User
+        model = MyUser
         fields = ('first_name', 'last_name', 'email')
 
 
