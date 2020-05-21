@@ -95,6 +95,7 @@
 
     <p>z nami od: {{ user.date_joined }}</p>
     {% if request.user == user %}
+        <p>rodzaj konta: {{ group }}</p>
         <p><a href="{% url 'edit-user' user.id %}">edytuj dane</a></p>
     {% endif %}
     <hr>
