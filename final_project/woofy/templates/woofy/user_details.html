@@ -5,7 +5,7 @@
 {% if request.user == user %}
     <h3>Twoja ostatnia aktywność {% include 'svg/activity.html' %}</h3>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Posty
         </span><br>
         {% for post in posts %}
@@ -20,7 +20,7 @@
         {% endfor %}
     </p>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Ogłoszenia
         </span><br>
         {% for announcement in announcements %}
@@ -37,7 +37,7 @@
         {% endfor %}
     </p>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Komentarze
         </span><br>
         {% for comment in comments %}
@@ -55,7 +55,7 @@
 {% else %}
     <h3>Aktywność {{user.username}} {% include 'svg/activity.html' %}</h3>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Posty
         </span><br>
         {% for post in posts %}
@@ -66,7 +66,7 @@
         {% endfor %}
     </p>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Ogłoszenia
         </span><br>
         {% for announcement in announcements %}
@@ -103,7 +103,7 @@
     {% if request.user == user %}
     <h3>Wiadomości {% include 'svg/msg.html' %}</h3>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Odebrane
         </span><br>
     <p>{% for r_message in r_messages %}
@@ -111,7 +111,7 @@
         {% empty %} -
         {% endfor %}</p>
     <p>
-        <span style="font-weight: bold">
+        <span class="bold">
             Wysłane
         </span><br>
     <p>{% for s_message in s_messages %}

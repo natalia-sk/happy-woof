@@ -71,8 +71,12 @@ li.menu {
 
 }
 
-#small {
+.small {
     font-size: small;
+}
+
+.medium {
+    font-size: medium;
 }
 
 #footer {
@@ -120,9 +124,18 @@ a:active {
     color: #2a3166;
 }
 
-p.small-center {
+.small-center {
     text-align: center;
     font-size: small;
+}
+
+.small-right {
+    text-align: right;
+    font-size: small;
+}
+
+.bold {
+    font-weight: bold;
 }
 
 /* -----

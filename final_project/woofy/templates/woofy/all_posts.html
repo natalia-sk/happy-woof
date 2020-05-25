@@ -13,7 +13,7 @@
 <p>
     <span>{{ post.content }}</span>
 </p>
-<p style="text-align: right; font-size: small">
+<p class="small-right">
     <!--    user info -->
     <a href="{% url 'user-details' post.user.id %}">{{ post.user }}</a> {% include 'svg/user.html' %}<br>
     <!--    date info -->

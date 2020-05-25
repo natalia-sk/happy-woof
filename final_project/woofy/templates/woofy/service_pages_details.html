@@ -4,8 +4,8 @@
 {% block content %}
 {% load get_item %}
 <h3>{{ page.name }} - {{ categories|get_item:page.category }}</h3>
-<p style="font-size: medium">{{ page.description }}</p>
-<p style="font-size: small">Adres: {{ page.address }} {{ page.city }}<br>
+<p class="medium">{{ page.description }}</p>
+<p class="small">Adres: {{ page.address }} {{ page.city }}<br>
 Telefon: {{ page.phone }}<br>
 e-mial: <a href="mailto: {{ page.email }}">{{ page.email }}</a><br>
 WWW: <a href="https://{{ page.homepage }}">{{ page.homepage }}</a></p>

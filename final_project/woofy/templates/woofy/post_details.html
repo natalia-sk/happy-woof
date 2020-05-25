@@ -6,7 +6,7 @@
 <p>
     {{ post.content }}
 </p>
-<p style="text-align: right; font-size: small">
+<p class="small-right">
     {{ post.user }} {% include 'svg/user.html' %}<br>
     {{ post.creation_date }} {% include 'svg/date.html' %}<br>
     <span class="city">{{ post.city }}</span> {% include 'svg/city.html' %}<br>
@@ -30,13 +30,13 @@
 </p>
 <hr>
 <h3>Komentarze</h3>
-<p style="text-align: center; font-size: small">liczba komentarzy: {{ comments|length }}</p>
+<p class="small-center">liczba komentarzy: {{ comments|length }}</p>
 
 {% for comment in comments %}
     <p>
         {{ comment.content }}
     </p>
-    <p style="text-align: right; font-size: small">
+    <p class="small-right">
         {{ comment.user }} {% include 'svg/user.html' %}<br>
         {{ comment.creation_date }} {% include 'svg/date.html' %}<br>
         {% if user == comment.user %}

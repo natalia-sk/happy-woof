@@ -8,14 +8,14 @@
 <p>
     Nadawca: {{ sender.username }}<br>
     Odbiorca: {{ receiver.username }}<br>
-    <span style="font-size: small">{{ msg.creation_date }}</span>
+    <span class="small">{{ msg.creation_date }}</span>
 </p>
 <hr>
 <p>
     {{ msg.content }}
 </p>
 <hr>
-<p style="font-weight: bold">Odpowiedz</p>
+<p class="bold">Odpowiedz</p>
 <form method="post" novalidate>
             {% csrf_token %}
             {{ form }}
@@ -34,7 +34,7 @@
 <hr>
 <h3>Wiadomości {% include 'svg/msg.html' %}</h3>
 <p>
-    <span style="font-weight: bold">
+    <span class="bold">
         Odebrane
     </span><br>
 <p>{% for r_message in r_messages %}
@@ -42,7 +42,7 @@
     {% empty %}- - -
     {% endfor %}</p>
 <p>
-    <span style="font-weight: bold">
+    <span class="bold">
         Wysłane
     </span><br>
 <p>{% for s_message in s_messages %}
