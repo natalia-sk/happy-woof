@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -246,12 +246,6 @@ class UserDetailsView(View):
     @method_decorator(login_required)
     def get(self, request, user_id):
         user = MyUser.objects.get(id=user_id)
-
-        if len(Group.objects.filter(user=user_id)) == 0:
-            user_group = "-"
-        else:
-            user_group = Group.objects.get(user=user_id).name
-
         posts = WoofyPost.objects.filter(user_id=user.id).order_by('-creation_date')
         pages = ServicePage.objects.filter(user_id=user.id).order_by('name')
         announcements = Announcement.objects.filter(user_id=user.id).order_by('-creation_date')
@@ -259,7 +253,6 @@ class UserDetailsView(View):
         r_messages = Message.objects.filter(receiver_id=user.id).order_by('-creation_date')
         s_messages = Message.objects.filter(sender_id=user.id).order_by('-creation_date')
         ctx = {'user': user,
-               'group': user_group,
                'posts': posts,
                'pages': pages,
                'announcements': announcements,

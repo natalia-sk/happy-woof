@@ -22,5 +22,8 @@
     {% endif %}
 
     <p>z nami od: {{ user.date_joined }}</p>
+    {% if request.user == user %}
+        <p>rodzaj konta: {{ group }}</p>
+    {% endif %}
 
 {% endblock %}
