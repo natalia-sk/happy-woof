@@ -37,7 +37,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('user_details/<int:user_id>/', UserDetailsView.as_view(), name='user-details'),
     path('edit_user/<int:user_id>/', EditUserDetailsView.as_view(), name='edit-user'),
-    path('password/', ChangeUserPasswordView.as_view(), name='edit-password'),
+    path('edit_user/password/', ChangeUserPasswordView.as_view(), name='edit-password'),
 
     # 404
     re_path(r'^[\w\/_-]+$', Error404View.as_view(), name='error')
