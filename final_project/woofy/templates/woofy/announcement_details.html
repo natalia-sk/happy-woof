@@ -4,7 +4,7 @@
 {% block content %}
 <h3>{{ announcement.title }}</h3>
 <p>{{ announcement.all_details }}</p>
-<p>{% if user.is_authenticated %}
+<p class="small-right">{% if user.is_authenticated %}
     <a href="{% url 'new-message' %}">wyślij wiadomość</a>
 	{% endif %}
 </p>
