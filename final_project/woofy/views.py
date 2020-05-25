@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from .forms import AddNewPostForm, LoginForm, MyUserForm, AddNewAnnouncementForm, AddServicePageForm, \
-    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm
+    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm, EditPostForm
 from .models import MyUser, WoofyPost, ServicePage, CATEGORIES, Comment, Announcement, Message
 
 
@@ -82,6 +82,28 @@ class AddNewPostView(View):
             instance.save()
             return redirect('index')
         return render(request, 'woofy/add_post.html', {'form': form})
+
+
+class EditPostView(View):
+    """
+    Edycja postu, tylko dla autora danego wpisu.
+    """
+
+    @method_decorator(login_required)
+    def get(self, request, post_id):
+        post = WoofyPost.objects.get(id=post_id)
+        form = EditPostForm(initial={'content': post.content, 'city': post.city})
+        return render(request, 'woofy/edit_post.html', {'form': form})
+
+    def post(self, request, post_id):
+        post = WoofyPost.objects.get(id=post_id)
+        form = EditPostForm(request.POST)
+        if form.is_valid():
+            post.content = form.cleaned_data['content']
+            post.city = form.cleaned_data['city']
+            post.save()
+            return redirect('post-details', post_id)
+        return render(request, 'woofy/edit_post.html', {'form': form})
 
 
 class PostDeleteView(View):

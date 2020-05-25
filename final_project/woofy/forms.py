@@ -3,11 +3,22 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField, UserChang
 from django.contrib.auth.models import Group
 
 
-from woofy.models import MyUser, WoofyPost, Announcement, ServicePage, Comment, Message
+from .models import MyUser, WoofyPost, Announcement, ServicePage, Comment, Message
 
 
 # dodawanie nowego posta
 class AddNewPostForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea,
+                              label='Treść',
+                              help_text='max. 250 znaków')
+
+    class Meta:
+        model = WoofyPost
+        fields = ['content', 'city']
+
+
+# edycja posta
+class EditPostForm(forms.ModelForm):
     content = forms.CharField(widget=forms.Textarea,
                               label='Treść',
                               help_text='max. 250 znaków')

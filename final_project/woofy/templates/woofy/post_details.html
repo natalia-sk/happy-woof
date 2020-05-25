@@ -11,7 +11,7 @@
     {{ post.creation_date }} {% include 'svg/date.html' %}<br>
     <span class="city">{{ post.city }}</span> {% include 'svg/city.html' %}<br>
         {% if user == post.user %}
-            <a href="{% url 'post-delete' post.id %}">usuń</a>/edytuj
+            <a href="{% url 'post-delete' post.id %}">usuń</a>/<a href="{% url 'edit-post' post.id %}">edytuj</a>
         {% else %}
         {% endif %}
 </p>

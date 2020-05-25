@@ -1,10 +1,11 @@
 from django.urls import path, re_path
 
 from happy_woof import settings
-from woofy.views import AllPostView, LoginView, LogoutView, UserCreationView, AddNewPostView, AddNewAnnouncementView, \
+from .views import AllPostView, LoginView, LogoutView, UserCreationView, AddNewPostView, AddNewAnnouncementView, \
     ServicePageListView, ServicePageDetailsView, AddServicePageView, PostDetailsView, UserDetailsView, \
     MessageDetailView, PostDeleteView, CommentDeleteView, AnnouncementDeleteView, AnnouncementDetailsView, \
-    ServicePageDeleteView, Error404View, EditUserDetailsView, ChangeUserPasswordView, NewMessageView, AllAnnouncementView
+    ServicePageDeleteView, Error404View, EditUserDetailsView, ChangeUserPasswordView, NewMessageView, \
+    AllAnnouncementView, EditPostView
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
@@ -24,6 +25,9 @@ urlpatterns = [
     path('add_service_page/', AddServicePageView.as_view(), name='add-service-page'),
     path('add_service_page/', AddServicePageView.as_view(), name='add-service-page'),
     path('new_msg/', NewMessageView.as_view(), name='new-message'),
+
+    # edit
+    path('edit_post/<int:post_id>/', EditPostView.as_view(), name='edit-post'),
 
     # delete
     path('post_delete/<int:post_id>/', PostDeleteView.as_view(), name='post-delete'),

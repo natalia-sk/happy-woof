@@ -22,7 +22,7 @@
     <span class="city">{{ post.city }}</span> {% include 'svg/city.html' %}<br>
     <!--    delete/edit options -->
     {% if request.user == post.user %}
-    <a href="{% url 'post-delete' post.id %}">usuń</a>/edytuj
+    <a href="{% url 'post-delete' post.id %}">usuń</a>/<a href="{% url 'edit-post' post.id %}">edytuj</a>
     {% else %}
     {% endif %}<br>
     <!--    comments options -->
