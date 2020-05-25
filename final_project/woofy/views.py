@@ -269,14 +269,14 @@ class EditUserDetailsView(View):
 
     @method_decorator(login_required)
     def get(self, request, user_id):
-        form = MyUserChangeForm(instance=request.user)
+        form = MyUserChangeForm(initial={'first_name': request.user.first_name,
+                                         'last_name': request.user.last_name})
         return render(request, 'woofy/edit_user.html', {'form': form})
 
     def post(self, request, user_id):
         form = MyUserChangeForm(request.POST)
         user = MyUser.objects.get(id=user_id)
         if form.is_valid():
-            user.email = form.cleaned_data['email']
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']
             user.save()

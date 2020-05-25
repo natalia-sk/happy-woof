@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField, UserChangeForm
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 
 
 from woofy.models import MyUser, WoofyPost, Announcement, ServicePage, Comment, Message
@@ -73,7 +73,7 @@ class MyUserChangeForm(UserChangeForm):
 
     class Meta:
         model = MyUser
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name')
 
 
 # formularz do logowania
