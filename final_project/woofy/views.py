@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from .forms import AddNewPostForm, LoginForm, MyUserForm, AddNewAnnouncementForm, AddServicePageForm, \
-    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm, EditPostForm
+    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm, EditPostForm, EditAnnouncementForm
 from .models import MyUser, WoofyPost, ServicePage, CATEGORIES, Comment, Announcement, Message
 
 
@@ -86,7 +86,7 @@ class AddNewPostView(View):
 
 class EditPostView(View):
     """
-    Edycja postu, tylko dla autora danego wpisu.
+    Post editing, only for the author of the post.
     """
 
     @method_decorator(login_required)
@@ -157,6 +157,33 @@ class AnnouncementDetailsView(View):
     def get(self, request, announcement_id):
         announcement = Announcement.objects.get(id=announcement_id)
         return render(request, 'woofy/announcement_details.html', {'announcement': announcement})
+
+
+class EditAnnouncementView(View):
+    """
+    Announcement editing, only for the author of the announcement.
+    """
+
+    @method_decorator(login_required)
+    def get(self, request, announcement_id):
+        announcement = Announcement.objects.get(id=announcement_id)
+        form = EditAnnouncementForm(initial={'title': announcement.title,
+                                             'content': announcement.content,
+                                             'all_details': announcement.all_details,
+                                             'city': announcement.city})
+        return render(request, 'woofy/edit_announcement.html', {'form': form})
+
+    def post(self, request, announcement_id):
+        announcement = Announcement.objects.get(id=announcement_id)
+        form = EditAnnouncementForm(request.POST)
+        if form.is_valid():
+            announcement.title = form.cleaned_data['title']
+            announcement.content = form.cleaned_data['content']
+            announcement.all_details = form.cleaned_data['all_details']
+            announcement.city = form.cleaned_data['city']
+            announcement.save()
+            return redirect('announcement-details', announcement_id)
+        return render(request, 'woofy/edit_announcement.html', {'form': form})
 
 
 class AnnouncementDeleteView(View):

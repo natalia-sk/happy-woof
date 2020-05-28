@@ -18,7 +18,7 @@
                 <span class="city">{{ announcement.city }}</span> {% include 'svg/city.html' %}<br>
                 <a href="{% url 'announcement-details' announcement.id %}">Sprawdź szczegóły</a> {% include 'svg/details.html' %}<br>
                 {% if user == announcement.user %}
-                    <a href="{% url 'announcement-delete' announcement.id %}">usuń</a>/edytuj
+                <a href="{% url 'announcement-delete' announcement.id %}">usuń</a>/<a href="{% url 'edit-announcement' announcement.id %}">edytuj</a>
                 {% else %}
                 {% endif %}
             </p>

@@ -35,6 +35,13 @@ class AddNewAnnouncementForm(forms.ModelForm):
         exclude = ['creation_date', 'user']
 
 
+# edycja ogłoszenia
+class EditAnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        exclude = ['creation_date', 'user']
+
+
 # dodawanie strony usługodawcy
 class AddServicePageForm(forms.ModelForm):
     description = forms.CharField(max_length=128, widget=forms.Textarea, required=False, label='Opis')
