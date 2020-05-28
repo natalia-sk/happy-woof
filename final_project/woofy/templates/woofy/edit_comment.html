@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<h3>Edytuj swój komentarz</h3>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <input type="submit" class="btn btn-light btn-sm" value="edytuj"> <input type="button" class="btn btn-light btn-sm" value="powrót" onclick="history.back()">
+</form>
+
+{% endblock %}

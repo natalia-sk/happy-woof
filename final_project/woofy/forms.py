@@ -64,6 +64,15 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
 
+# edycowanie komentarza
+class EditCommentForm(forms.ModelForm):
+    content = forms.CharField(max_length=140, widget=forms.Textarea, label='Komentarz')
+
+    class Meta:
+        model = Comment
+        fields = ['content']
+
+
 # wysyłanie wiadomości
 class MessageForm(forms.ModelForm):
     class Meta:

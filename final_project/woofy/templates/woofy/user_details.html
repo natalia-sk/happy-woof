@@ -41,12 +41,12 @@
             Komentarze
         </span><br>
         {% for comment in comments %}
-        &#8250; <a href="{% url 'post-delete' comment.post_id %}">
+        &#8250; <a href="{% url 'post-details' comment.post_id %}">
             {{ comment.content|truncatewords:5 }}
         </a>
         <span class="small">
             {% if request.user == comment.user %}
-            (<a href="{% url 'comment-delete' comment.id %}">usuń</a>/edytuj)
+            (<a href="{% url 'comment-delete' comment.id %}">usuń</a>/<a href="{% url 'edit-comment' comment.id %}">edytuj</a>)
             {% endif %}
         </span><br>
         {% empty %}Brak aktywności :(

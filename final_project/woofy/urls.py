@@ -5,7 +5,7 @@ from .views import AllPostView, LoginView, LogoutView, UserCreationView, AddNewP
     ServicePageListView, ServicePageDetailsView, AddServicePageView, PostDetailsView, UserDetailsView, \
     MessageDetailView, PostDeleteView, CommentDeleteView, AnnouncementDeleteView, AnnouncementDetailsView, \
     ServicePageDeleteView, Error404View, EditUserDetailsView, ChangeUserPasswordView, NewMessageView, \
-    AllAnnouncementView, EditPostView, EditAnnouncementView
+    AllAnnouncementView, EditPostView, EditAnnouncementView, EditCommentView
 from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
@@ -29,6 +29,7 @@ urlpatterns = [
     # edit
     path('edit_post/<int:post_id>/', EditPostView.as_view(), name='edit-post'),
     path('edit_announcement/<int:announcement_id>/', EditAnnouncementView.as_view(), name='edit-announcement'),
+    path('edit_comment/<int:comment_id>/', EditCommentView.as_view(), name='edit-comment'),
 
     # delete
     path('post_delete/<int:post_id>/', PostDeleteView.as_view(), name='post-delete'),

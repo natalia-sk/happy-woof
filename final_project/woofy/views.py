@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from .forms import AddNewPostForm, LoginForm, MyUserForm, AddNewAnnouncementForm, AddServicePageForm, \
-    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm, EditPostForm, EditAnnouncementForm
+    CommentForm, MessageForm, MyUserChangeForm, NewMessageForm, EditPostForm, EditAnnouncementForm, EditCommentForm
 from .models import MyUser, WoofyPost, ServicePage, CATEGORIES, Comment, Announcement, Message
 
 
@@ -62,6 +62,27 @@ class PostDetailsView(View):
         else:
             ctx = {'form': form, 'post': post, 'comments': comments}
             return render(request, 'woofy/post_details.html', ctx)
+
+
+class EditCommentView(View):
+    """
+    Comment editing, only for the author of the announcement.
+    """
+
+    @method_decorator(login_required)
+    def get(self, request, comment_id):
+        comment = Comment.objects.get(id=comment_id)
+        form = EditCommentForm(initial={'content': comment.content})
+        return render(request, 'woofy/edit_announcement.html', {'form': form})
+
+    def post(self, request, comment_id):
+        comment = Comment.objects.get(id=comment_id)
+        form = EditCommentForm(request.POST)
+        if form.is_valid():
+            comment.content = form.cleaned_data['content']
+            comment.save()
+            return redirect('post-details', comment.post_id)
+        return render(request, 'woofy/edit_comment.html', {'form': form})
 
 
 class AddNewPostView(View):
@@ -159,6 +180,26 @@ class AnnouncementDetailsView(View):
         return render(request, 'woofy/announcement_details.html', {'announcement': announcement})
 
 
+class AddNewAnnouncementView(View):
+    """
+    Adding new announcement, only for logged in users
+    """
+
+    @method_decorator(login_required)
+    def get(self, request):
+        form = AddNewAnnouncementForm()
+        return render(request, 'woofy/add_announcement.html', {'form': form})
+
+    def post(self, request):
+        form = AddNewAnnouncementForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect('announcements')
+        return render(request, 'woofy/add_announcement.html', {'form': form})
+
+
 class EditAnnouncementView(View):
     """
     Announcement editing, only for the author of the announcement.
@@ -202,26 +243,6 @@ class AnnouncementDeleteView(View):
             announcement.delete()
             return redirect('index')
         return redirect('index')
-
-
-class AddNewAnnouncementView(View):
-    """
-    Adding new announcement, only for logged in users
-    """
-
-    @method_decorator(login_required)
-    def get(self, request):
-        form = AddNewAnnouncementForm()
-        return render(request, 'woofy/add_announcement.html', {'form': form})
-
-    def post(self, request):
-        form = AddNewAnnouncementForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.save()
-            return redirect('announcements')
-        return render(request, 'woofy/add_announcement.html', {'form': form})
 
 
 class ServicePageListView(View):

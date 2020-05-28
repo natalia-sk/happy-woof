@@ -40,7 +40,7 @@
         {{ comment.user }} {% include 'svg/user.html' %}<br>
         {{ comment.creation_date }} {% include 'svg/date.html' %}<br>
         {% if user == comment.user %}
-            <a href="{% url 'comment-delete' comment.id %}">usuń</a>/edytuj
+        <a href="{% url 'comment-delete' comment.id %}">usuń</a>/<a href="{% url 'edit-comment' comment.id %}">edytuj</a>
         {% else %}
         {% endif %}
     </p><hr>
