@@ -4,7 +4,7 @@
 <form method="post" novalidate>
     {% csrf_token %}
     {{ form }}
-    Czy na pewno chcesz usunąć ogłoszenie?<br>
+    Czy na pewno chcesz usunąć ogłoszenie <span class="bold">"{{ announcement.title }}"</span>?<br>
     <input type="submit" name="delete" value="usuń" class="btn btn-light btn-sm">
     <input type="button" value="powrót" class="btn btn-light btn-sm" onclick="history.back()">
     <br>

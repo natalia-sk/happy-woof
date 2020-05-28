@@ -193,7 +193,8 @@ class AnnouncementDeleteView(View):
 
     @method_decorator(login_required)
     def get(self, request, announcement_id):
-        return render(request, 'woofy/announcement_confirm_delete.html')
+        announcement = Announcement.objects.get(id=announcement_id)
+        return render(request, 'woofy/announcement_confirm_delete.html', {'announcement': announcement})
 
     def post(self, request, announcement_id):
         announcement = Announcement.objects.get(id=announcement_id)
