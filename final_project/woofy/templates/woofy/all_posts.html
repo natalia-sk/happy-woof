@@ -33,4 +33,10 @@
 
 {% include 'base/posts_paginator.html' %}
 
+<p  class="small-center">
+    <span><a href="{% url 'add-post' %}">dodaj post</a></span> |
+    <span><a href="{% url 'add-announcement' %}">dodaj ogłoszenie</a></span> |
+    <span><a href="{% url 'service-pages' %}">usługodawcy</a></span>
+</p>
+
 {% endblock %}

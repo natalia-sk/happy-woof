@@ -1,9 +1,9 @@
 <p class="small-center">
     {% if posts.has_other_pages %}
                 {% if posts.has_previous %}
-                    <a href="?page={{ posts.previous_page_number }}">&#60; poprzednia</a> |
+                    <a href="?page={{ posts.previous_page_number }}">&#60;&#60; poprzednia</a> |
                 {% else %}
-                    <span>&#60; poprzednia |</span>
+                    <span>&#60;&#60; poprzednia |</span>
                 {% endif %}
 
                 {% for i in posts.paginator.page_range %}
@@ -15,9 +15,9 @@
                 {% endfor %}
 
                 {% if posts.has_next %}
-                    <a href="?page={{ posts.next_page_number }}">następna &#62;</a>
+                    <a href="?page={{ posts.next_page_number }}">następna &#62;&#62;</a>
                 {% else %}
-                    <span>następna &#62;</span>
+                    <span>następna &#62;&#62;</span>
                 {% endif %}
             {% endif %}
 </p>
