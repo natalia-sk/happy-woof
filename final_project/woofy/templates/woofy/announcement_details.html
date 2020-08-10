@@ -7,7 +7,9 @@
 <p class="small-right">{% if user.is_authenticated %}
     <a href="{% url 'new-message' %}">wyślij wiadomość</a>
 	{% endif %}
+    / <a href="#" onclick="history.back()">powrót</a>
 </p>
+
 {% endblock %}
 
 
