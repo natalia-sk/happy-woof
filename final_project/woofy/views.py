@@ -167,7 +167,12 @@ class AllAnnouncementView(View):
     """
 
     def get(self, request):
-        return render(request, 'woofy/all_announcements.html')
+        city = request.GET.get('city')
+        if city is not None:
+            results_announcement = Announcement.objects.filter(city__icontains=city).order_by('-creation_date')
+        else:
+            results_announcement = Announcement.objects.all().order_by('-creation_date')
+        return render(request, 'woofy/all_announcements.html', {'results_announcement': results_announcement})
 
 
 class AnnouncementDetailsView(View):

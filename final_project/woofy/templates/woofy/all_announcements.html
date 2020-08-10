@@ -7,7 +7,7 @@
 
 <br>
 
-{% for announcement in all_announcements %}
+{% for announcement in results_announcement %}
             <p>
                 <span class="title">{{announcement.title}}</span><br>
             {{ announcement.content }}
@@ -36,8 +36,11 @@
 <a href="{% url 'add-announcement' %}">{% include 'svg/activity.html' %} Dodaj swoje ogłoszenie</a>
 <br>
 {% include 'svg/details.html' %} W naszej bazie mamy {{ all_announcements|length }} ogłoszeń
-<br>
-{% include 'svg/city.html' %} Szukaj ogłoszeń w Twoim mieście
-<!--tutaj dodać wyszukiwarkę do ogłoszeń-->
+<br><br>
+<p>{% include 'svg/city.html' %} Szukaj ogłoszeń w Twoim mieście
+    <form action="/all_announcements" method="get">
+        <input type="text" name="city"> <input type="submit" value="Szukaj">
+</form>
 
+</p>
 {% endblock %}
