@@ -6,7 +6,40 @@
 <h3>Ogłoszenia</h3>
 
 <br>
+<p>{% if city is not None %}
+        {% if results_number == 0 %}
+            Brak wyników wyszukiwania dla "{{ city }}". <br>Sprawdź wyniki dla "Cała Polska":
+<!--                        Brak wyników wyszkiwania wyniki dla ogłoszeń na cały kraj -->
+                        {% for announcement in all_poland_announcement %}
+                        <p>
+                            <span class="title">{{announcement.title}}</span><br>
+                        {{ announcement.content }}
+                        </p>
+                        <p class="small-right">
+                            <a href="{% url 'user-details' announcement.user.id %}">{{ announcement.user }}</a> {% include 'svg/user.html' %}<br>
+                            {{ announcement.creation_date }} {% include 'svg/date.html' %}<br>
+                            <span class="city">{{ announcement.city }}</span> {% include 'svg/city.html' %}<br>
+                            <a href="{% url 'announcement-details' announcement.id %}">Sprawdź szczegóły</a> {% include 'svg/details.html' %}<br>
+                            {% if user == announcement.user %}
+                            <a href="{% url 'announcement-delete' announcement.id %}">usuń</a>/<a href="{% url 'edit-announcement' announcement.id %}">edytuj</a>
+                            {% else %}
+                            {% endif %}
+                        </p>
+                        <p>{% if user.is_authenticated %}
+                            <a href="{% url 'new-message' %}">wyślij wiadomość</a>
+                            {% endif %}
+                        </p>
+                        <hr>
+                        {% endfor %}
+        {% else %}
+            Wyniki wyszukiwania dla "{{ city }}":
+<!--            Pokaże wyniki dla wyszukiwania po mieście -->
+        {% endif %}
+   {% else %}
+   {% endif %}
+</p>
 
+<!--                Pokaże wszystkie ogłoszenia lub wyniki wyszukwania (jeśli jest wynik)-->
 {% for announcement in results_announcement %}
             <p>
                 <span class="title">{{announcement.title}}</span><br>
@@ -40,7 +73,10 @@
 <p>{% include 'svg/city.html' %} Szukaj ogłoszeń w Twoim mieście
     <form action="/all_announcements" method="get">
         <input type="text" name="city"> <input type="submit" value="Szukaj">
-</form>
-
+    </form>
+</p>
+<p>{% if city is not None %}
+        <a href="{% url 'announcements' %}">Pokaż wszystkie ogoszenia</a>
+    {% endif %}
 </p>
 {% endblock %}

@@ -170,9 +170,16 @@ class AllAnnouncementView(View):
         city = request.GET.get('city')
         if city is not None:
             results_announcement = Announcement.objects.filter(city__icontains=city).order_by('-creation_date')
+            results_number = len(results_announcement)
         else:
             results_announcement = Announcement.objects.all().order_by('-creation_date')
-        return render(request, 'woofy/all_announcements.html', {'results_announcement': results_announcement})
+            results_number = 1
+        all_poland_announcement = Announcement.objects.filter(city__icontains='Cała Polska').order_by('-creation_date')
+        ctx = {'results_announcement': results_announcement,
+               'city': city,
+               'results_number': results_number,
+               'all_poland_announcement': all_poland_announcement}
+        return render(request, 'woofy/all_announcements.html', ctx)
 
 
 class AnnouncementDetailsView(View):
