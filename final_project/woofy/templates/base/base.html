@@ -72,10 +72,7 @@
                 {% else %}
                 {% endif %}
             </p>
-            <p class="small-right">{% if user.is_authenticated %}
-                <a href="{% url 'new-message' %}">wyślij wiadomość</a>
-                {% endif %}
-            </p>
+
             <hr>
             {% endfor %}
 
