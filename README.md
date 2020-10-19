@@ -3,7 +3,7 @@ Social media for dog lovers. User can write posts, announcement and creating sim
 
 ## Technologies
 * Python 3.8.5
-* Django 2.2.5
+* Django >= 2.2.5
 * django-extensions 3.0.9
 * psycopg2-binary 2.8.6
 
