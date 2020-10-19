@@ -1,0 +1,12 @@
+# Database
+# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'HOST': 'localhost',
+        'NAME': '<database_name>',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'USER': '<username>',
+        'PASSWORD': '<password>',
+    }
+}
