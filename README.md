@@ -1,5 +1,5 @@
 # happy-woof
-Happy Woof is a social networking site. It is designed for dog owners and lovers. A registered user can add or delete posts, comments, announcements, what is more, can send messages to other users registered on the site. Moreover, the user registered as a 'service provider' has an opportunity to create a simple page with basic information about his business.
+Happy Woof is a social networking site. It is designed for dog owners and dog lovers. A registered user can add or delete posts, comments, announcements -  and what is more - can send messages to other users registered on the site. Moreover, the user registered as a 'service provider' has an opportunity to create a simple page with basic information about his business.
 
 ## Technologies
 * Python 3.8.5
